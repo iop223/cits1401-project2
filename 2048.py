@@ -1,4 +1,4 @@
-## Justin Chong 21508335, Mitchell Wooding [number
+## Justin Chong 21508335, Mitchell Wooding 22088045
 
 from graphics import *
 import math
