@@ -21,7 +21,7 @@ def erase(win):
 def drawboxes(win):
     for i in range(0,5):
         for j in range(0,5):
-            box = Rectangle(Point(Xmin+20+i*100,Ymax-20-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            box = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             box.setFill(color_rgb(255,0,255))
             box.draw(win)
 
