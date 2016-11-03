@@ -15,10 +15,12 @@ def main():
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
             win.close
+            
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
     rect.draw(win)
+    
 def drawboxes(win):
     listBox=[]
     for i in range(0,5):
@@ -28,13 +30,14 @@ def drawboxes(win):
             box.draw(win)
             listBox.append(box)
             print (listBox[i])
+            
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
 def makeInterface(win):
     win.setBackground(color_rgb(139,69,19))
     erase(win)
     drawboxes(win)
-    scoreBoard(win)
+    statDisplay(win)
 
     #rectangle button with text
     quitButton = Rectangle(Point(Xmax-100, Ymax-50),Point(Xmax, Ymax))
@@ -55,12 +58,6 @@ def makeInterface(win):
 def isClicked(pClick, button):
     if (pClick.getX() > button.getP1().getX()) and (pClick.getY() > button.getP1().getY()) and (pClick.getX() < button.getP2().getX()) and (pClick.getY() < button.getP2().getY()):
         return True
-
-
-#This function Displays the score
-def scoreBoard(win):
-    scoreDisplay = Text(Point(Xmin+50,Ymin+50), "fag").draw(win)
-    statDisplay(win)
 
 #This function Displays the score
 def statDisplay(win):
