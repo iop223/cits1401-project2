@@ -11,16 +11,10 @@ def main():
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     newGamebutton, quitButton = makeInterface(win)
     x = 0
-<<<<<<< HEAD
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
             win.close
-    
-=======
-
->>>>>>> 3eb3eb2c0e8acc0c2835deb0ff5a50f9eaa43bb4
-
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
@@ -40,7 +34,6 @@ def makeInterface(win):
     win.setBackground(color_rgb(139,69,19))
     erase(win)
     drawboxes(win)
-<<<<<<< HEAD
     scoreBoard(win)
 
     #rectangle button with text
@@ -67,7 +60,6 @@ def isClicked(pClick, button):
 #This function Displays the score
 def scoreBoard(win):
     scoreDisplay = Text(Point(Xmin+50,Ymin+50), "fag").draw(win)
-=======
     statDisplay(win)
 
 #This function Displays the score
@@ -78,6 +70,5 @@ def statDisplay(win):
     scoreDisplay = Text(Point(Xmin+100,Ymin+50), "SCORE").draw(win)
     moveSucces = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
 
->>>>>>> 3eb3eb2c0e8acc0c2835deb0ff5a50f9eaa43bb4
 
 main()
