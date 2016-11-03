@@ -31,4 +31,10 @@ def makeInterface(win):
     win.setBackground(color_rgb(139,69,19))
     erase(win)
     drawboxes(win)
+
+#This function Displays the score
+def scoreBoard(win):
+    scoreDisplay = Text(Point(Xmin+50,Ymin+50), "fag").draw(win)
+
+
 main()
