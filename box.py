@@ -26,10 +26,8 @@ class Box:
         box.value=value
         return box
 
-    def setListNum(listNum):
-        box = Box()
-        box.listNum=listNum
-        return box
+    def setListNum(inListNum):
+        listNum = inListNum
     
     def getValue():
         return value

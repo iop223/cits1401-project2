@@ -45,15 +45,14 @@ def drawboxes(win):
     listBox=[]
     x=0
     for i in range(0,5):
-        for j in range(0,5):
-            x=x+1
+        for j in range(0,5):            
             square=Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             square.setFill(isHighlighted(box))
             square.draw(win)
-            box.setListNum(x)
-            listBox.append(box)
+            box.setListNum('x')
+            listBox.append([x])
             print (listBox[x])
-            
+            x = x+1
 def isHighlighted(box):
     tempColour=(color_rgb(255,0,255))
     if box.getHighlight():
@@ -149,7 +148,7 @@ def newGamestate():
     return matrix
 #Moves tiles upwards; return true if something moved
 def up():
-    legalMove = false
+    legalMove = False
     for i in range(0,5):
         k=0
         upColumn = {0,0,0,0,0}
