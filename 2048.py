@@ -12,12 +12,12 @@ Ymin, Ymax = 0, 720
 def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
+    #quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
-    gamestate = newGamestate()
-    print(gamestate)
-    up()
-    print(gamestate)
+    gameState = newGamestate()
+    print(gameState)
+    print("shift up")
+    print(up(gameState))
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -35,16 +35,16 @@ def main():
 
             
 def erase(win):
-    
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
     rect.draw(win)
     
 def drawboxes(win):
-    box = Box()
+    gamebox = box()
     listBox=[]
     x=0
     for i in range(0,5):
+<<<<<<< HEAD
         for j in range(0,5):            
             square=Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             square.setFill(isHighlighted(box))
@@ -59,6 +59,16 @@ def isHighlighted(box):
         tempColour=(color_rgb(0,255,0))
     return tempColour
         
+=======
+        for j in range(0,5):
+            gameBox.setCoordinate = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            gameBox.setColour(0)
+            gameBox.drawBox().draw(win)
+            listBox.append(gameBox)
+            print (listBox[x])
+            x=x+1
+            
+>>>>>>> 2e801aefb93b0482c9db60c9750f5ef042316701
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
 def makeInterface(win):
@@ -146,33 +156,49 @@ def newGamestate():
             if rand == 1:
                 matrix[i][j] = 2
     return matrix
+<<<<<<< HEAD
 #Moves tiles upwards; return true if something moved
 def up():
     legalMove = False
+=======
+#Moves tiles upwards; return 1 if something moved
+def up(matrix):
+>>>>>>> 2e801aefb93b0482c9db60c9750f5ef042316701
     for i in range(0,5):
         k=0
         upColumn = {0,0,0,0,0}
         initialColumn = {0,0,0,0,0}
+        upColumn = [0,0,0,0,0]
+        initialColumn = [0,0,0,0,0]
         for j in range(0,5):
             if(gamestate[i][j] != 0):
                 initialColumn[j] = gamestate[i][j] #creates alias of column
                 upColumn[j] = gamestate[i][k] # creates column shifted up
+            if(matrix[i][j] != 0):
+                initialColumn[j] = matrix[i][j] #creates alias of column
+                upColumn[j] = matrix[i][k] # creates column shifted up
                 k = k+1
         for j in range(0,5):
+"""        for j in range(0,4):
             if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
                 x = upColumn[j];
                 upColumn[j] = x*2
                 upColumn[i+1] = 0
+                upColumn[j+1] = 0
 
         k = 0
         for j in range(0,5):
             gamestate[i][j] = 0
+            matrix[i][j] = 0
             if upColumn[j] != 0:
                 gamestate[i][j] = upColumn[j]
+                matrix[i][j] = upColumn[j]
                 k = k + 1
             if gamestate[i][j] != initialColumn[j]:
                 legalMove = true
     return legalMove
+"""
+        return matrix
                 
     
     
