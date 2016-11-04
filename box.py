@@ -3,7 +3,6 @@ listNum = 0
 value = 0
 highlight = 0
 class Box:
-    pass
     def __init__(self,listNum=0,value=0,highlight=0):
         self.listNum = listNum
         self.value = value
@@ -35,9 +34,6 @@ class Box:
     def getListNum():
         return listNum
 
-    def getHighlight(highlight):
-        if highlight == 1:
-            isHighlight = True
-        else:
-            isHighlight = False
-        return highlight
+    def getHighlight():
+        x=highlight
+        return x
