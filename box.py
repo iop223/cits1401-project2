@@ -10,13 +10,12 @@ class box(object):
         self.highlight = highlight
         self.colour = colour
 
-    def makeBox(coordinate,value,highlight):
+    def setBox(coordinate,value,highlight):
         box = Box()
         box.coordinate = coordinate
         box.value = value
         box.highlight = highlight
         box.colour = determineHighlight(highlight)
-        return box
     
     def setValue(value):
         box.value = value
@@ -26,6 +25,9 @@ class box(object):
 
     def setColour(highlight):
         box.colour = determineHighlight(highlight)
+
+    def getBox():
+        return box
 
     def getValue():
         return value
