@@ -1,42 +1,45 @@
 from graphics import *
-class Box(object):
-    shape = Rectangle(Point(0,0),Point(0,0))
-    value = 0.0
-    highlight = 0
-    
-    def __init__(shape, value , highlight):
-        self.shape = shape
+listNum = 0
+value = 0
+highlight = 0
+class Box:
+    pass
+    def __init__(self,listNum=0,value=0,highlight=0):
+        self.listNum = listNum
         self.value = value
-        self.highlight = value
+        self.highlight = highlight
         
-    def makeBox(shape,value,highlight):
+    def makeBox(listNum,value,highlight):
         box = Box()
-        box.shape = shape
+        box.listNum
         box.value = value
         box.highlight = highlight
-        determineHighlight(highlight,shape)
         return box
 
-    def setShape(shape):
-        box.shape = shape
+    def setHighlight(highlight):
+        box = Box()
+        box.highlight=highlight
+        return box
 
-    def setColour(highlight):
-        box.highlight = highlight
-        determineHighlight(highlight,shape)
+    def setValue(value):
+        box = Box()
+        box.value=value
+        return box
 
-    def getMidpoint(shape):
-        midpointX = (shape.getP1().getX() + shape.getP2().getX())/2
-        midpointY = (shape.getP1().getY() + shape.getP2().getY())/2
-        midpoint = Point(midpointX,midpointY)
-        return midpoint
+    def setListNum(listNum):
+        box = Box()
+        box.listNum=listNum
+        return box
     
-    def determineHighlight(highlight,rectangle):
-        colourTemp = shape.setFill(color_rgb(255,0,255))
+    def getValue():
+        return value
+    
+    def getListNum():
+        return listNum
+
+    def getHighlight(highlight):
         if highlight == 1:
-                colourTemp = shape.setFill(color_rgb(188,0,255))
-        return colourTemp
-
-    def drawShape(shape):
-        return shape
-
-
+            isHighlight = True
+        else:
+            isHighlight = False
+        return highlight
