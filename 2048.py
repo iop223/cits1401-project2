@@ -9,12 +9,17 @@ Ymin, Ymax = 0, 720
 def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    newGamebutton, quitButton = makeInterface(win)
+    quitButton, newGamebutton = makeInterface(win)
+    Pt = win.getMouse()
     x = 0
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
+            Pt = (0.0)
             win.close
+            print ("kys")
+        elif isClicked(Pt,newGamebutton):
+            print ("dont kys")
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -52,6 +57,8 @@ def makeInterface(win):
     newGamebutton.draw(win)
     ng = Text(Point(Xmax-50, Ymax-85), "New Game")
     ng.draw(win)
+
+    return quitButton, newGamebutton
 
 
 #This function should take the Point pClick where the mouse was clicked and the button identifier and return True if the click was inside the button otherwise it should return False.
