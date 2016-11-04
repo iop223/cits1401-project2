@@ -53,9 +53,8 @@ def drawboxes(win):
             
 def isHighlited(box,square):
     square.setFill(color_rgb(255,0,255))
-    x = Box.getHighlight
-    print (x)
-    if x==0:
+    x = getattr(box,"highlight",0)
+    if x==1:
         square.setFill(color_rgb(0,255,0))
     return square
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
@@ -143,7 +142,9 @@ def newGamestate():
         for j in range(0,5):
             rand = random.randint(0, 1)
             if rand == 1:
-                matrix[i][j] = 2
+                box = Box()
+                setattr(box, "value",2)
+                matrix[i][j] = Box()
     return matrix
 #Moves tiles left
 def left(matrix):
@@ -157,26 +158,20 @@ def left(matrix):
                 leftRow[k] = matrix[i][j] #creates column shifted up
                 k = k+1
         for j in range(0,4):
-<<<<<<< HEAD
             if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
-=======
             if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
                 x = upColumn[j];
                 upColumn[j] = x*2
                 upColumn[j+1] = 0
->>>>>>> fuk_me
-
         k = 0
         for j in range(0,5):
             matrix[i][j] = 0
             if leftRow[j] != 0:
                 matrix[i][j] = leftRow[j]
                 k = k + 1
-
-<<<<<<< HEAD
     return matrix
 
 #rotates matrix clockwise 90 degrees
@@ -186,11 +181,6 @@ def clockwise(matrix):
         for j in range(0,5):
             rotatedMatrix[i][j] = matrix[5-j-1][i]
     return rotatedMatrix
-    
-=======
-        return matrix
->>>>>>> fuk_me
-                
-    
+    return matrix
     
 main()
