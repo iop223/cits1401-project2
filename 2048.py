@@ -2,8 +2,12 @@
 
 from graphics import *
 import math
+<<<<<<< HEAD
 import box
 import random
+=======
+from box import *
+>>>>>>> b2bab1157beb8c481593c833eea9772091ae18bb
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 
@@ -37,14 +41,15 @@ def erase(win):
     rect.draw(win)
     
 def drawboxes(win):
+    gamebox= box()
     listBox=[]
     x=0
     for i in range(0,5):
         for j in range(0,5):
-            box = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
-            box.setFill(color_rgb(255,0,255))
-            box.draw(win)
-            listBox.append(box)
+            gameBox.setCoordinate = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            gameBox.setColour(0)
+            gameBox.drawBox().draw(win)
+            listBox.append(gameBox)
             print (listBox[x])
             x=x+1
             
