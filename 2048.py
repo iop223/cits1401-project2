@@ -12,12 +12,12 @@ Ymin, Ymax = 0, 720
 def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
+    #quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
-    gamestate = newGamestate()
-    print(gamestate)
-    up()
-    print(gamestate)
+    gameState = newGamestate()
+    print(gameState)
+    print("shift up")
+    print(up(gameState))
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -139,34 +139,33 @@ def newGamestate():
             if rand == 1:
                 matrix[i][j] = 2
     return matrix
-#Moves tiles upwards; return true if something moved
-def up():
-    legalMove = false
+#Moves tiles upwards; return 1 if something moved
+def up(matrix):
     for i in range(0,5):
         k=0
-        upColumn = {0,0,0,0,0}
-        initialColumn = {0,0,0,0,0}
+        upColumn = [0,0,0,0,0]
+        initialColumn = [0,0,0,0,0]
         for j in range(0,5):
-            if(gamestate[i][j] != 0):
-                initialColumn[j] = gamestate[i][j] #creates alias of column
-                upColumn[j] = gamestate[i][k] # creates column shifted up
+            if(matrix[i][j] != 0):
+                initialColumn[j] = matrix[i][j] #creates alias of column
+                upColumn[j] = matrix[i][k] # creates column shifted up
                 k = k+1
-        for j in range(0,5):
+        return matrix
+"""        for j in range(0,4):
             if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
                 x = upColumn[j];
                 upColumn[j] = x*2
-                upColumn[i+1] = 0
+                upColumn[j+1] = 0
 
         k = 0
         for j in range(0,5):
-            gamestate[i][j] = 0
+            matrix[i][j] = 0
             if upColumn[j] != 0:
-                gamestate[i][j] = upColumn[j]
+                matrix[i][j] = upColumn[j]
                 k = k + 1
-            if gamestate[i][j] != initialColumn[j]:
-                legalMove = true
-    return legalMove
-                
+
+        return matrix
+"""                
     
     
 main()
