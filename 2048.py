@@ -11,14 +11,11 @@ def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
-    Pt = win.getMouse()
     x = 0
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
-            Pt = (0.0)
-            win.close
-            print ("kys")
+            win.close()
         elif isClicked(Pt,newGamebutton):
             print ("Create new game")
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
@@ -123,7 +120,5 @@ def statDisplay(win):
     #direction = getDirection(direction)
     #success = getSuccess(success)
     scoreDisplay = Text(Point(Xmin+100,Ymin+50), "SCORE").draw(win)
-    moveSucces = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
-
-
+    moveSuccess = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
 main()
