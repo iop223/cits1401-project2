@@ -2,12 +2,9 @@
 
 from graphics import *
 import math
-<<<<<<< HEAD
 import box
 import random
-=======
 from box import *
->>>>>>> b2bab1157beb8c481593c833eea9772091ae18bb
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 
