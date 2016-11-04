@@ -10,7 +10,7 @@ Ymin, Ymax = 0, 720
 def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    quitButton, newGamebutton = makeInterface(win)
+    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton = makeInterface(win)
     Pt = win.getMouse()
     x = 0
     while x==0:
@@ -19,8 +19,14 @@ def main():
             Pt = (0.0)
             win.close
             print ("kys")
-        elif isClicked(Pt,newGamebutton):
-            print ("dont kys")
+        elif isClicked(Pt,upButton):
+            print ("up")
+        elif isClicked(Pt,downButton):
+            print ("down")
+        elif isClicked(Pt,leftButton):
+            print ("left")
+        elif isClicked(Pt,rightButton):
+            print ("right")
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -59,7 +65,34 @@ def makeInterface(win):
     ng = Text(Point(Xmax-50, Ymax-85), "New Game")
     ng.draw(win)
 
-    return quitButton, newGamebutton
+    #rectangle button with text
+    upButton = Rectangle(Point(Xmin+575, Ymin+ 80),Point(Xmin+625,Ymin+120))
+    upButton.setFill('#568203')
+    upButton.draw(win)
+    ng = Text(Point(Xmin+600,Ymin+100), "up")
+    ng.draw(win)
+
+    #rectangle button with text
+    downButton = Rectangle(Point(Xmin+575, Ymin+30),Point(Xmin+625,Ymin+70))
+    downButton.setFill('#568203')
+    downButton.draw(win)
+    ng = Text(Point(Xmin+600,Ymin+50), "down")
+    ng.draw(win)
+
+    #rectangle button with text
+    leftButton = Rectangle(Point(Xmin+525, Ymin+30),Point(Xmin+575,Ymin+70))
+    leftButton.setFill('#568203')
+    leftButton.draw(win)
+    ng = Text(Point(Xmin+550,Ymin+50), "left")
+    ng.draw(win)
+
+    #rectangle button with text
+    rightButton = Rectangle(Point(Xmin+625, Ymin+30),Point(Xmin+675,Ymin+70))
+    rightButton.setFill('#568203')
+    rightButton.draw(win)
+    ng = Text(Point(Xmin+650,Ymin+50), "right")
+    ng.draw(win)
+    return quitButton, newGamebutton, upButton, downButton, leftButton, rightButton
 
 
 #This function should take the Point pClick where the mouse was clicked and the button identifier and return True if the click was inside the button otherwise it should return False.
