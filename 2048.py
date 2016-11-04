@@ -40,18 +40,25 @@ def erase(win):
     rect.draw(win)
     
 def drawboxes(win):
-    gamebox = Box()
+    box = Box()
     listBox=[]
     x=0
     for i in range(0,5):
         for j in range(0,5):
-            gameBox.setShape = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
-            gameBox.setColour(0)
-            gameBox.drawSHape().draw(win)
-            listBox.append(gameBox)
-            print (listBox[x])
             x=x+1
+            square=Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            square.setFill(isHighlighted(box))
+            square.draw(win)
+            box.setListNum(x)
+            listBox.append(box)
+            print (listBox[x])
             
+def isHighlighted(box):
+    tempColour=(color_rgb(255,0,255))
+    if box.getHighlight():
+        tempColour=(color_rgb(0,255,0))
+    return tempColour
+        
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
 def makeInterface(win):
