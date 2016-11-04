@@ -12,7 +12,7 @@ Ymin, Ymax = 0, 720
 def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    #quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
+    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
     gameState = newGamestate()
     print(gameState)
@@ -40,18 +40,24 @@ def erase(win):
     rect.draw(win)
     
 def drawboxes(win):
-    gamebox = box()
+    box = Box()
     listBox=[]
     x=0
     for i in range(0,5):
         for j in range(0,5):
-            gameBox.setCoordinate = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
-            gameBox.setColour(0)
-            gameBox.drawBox().draw(win)
-            listBox.append(gameBox)
-            print (listBox[x])
+            square = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            square = isHighlited(box,square)
+            listBox.append(box)
+            square.draw(win)
             x=x+1
             
+def isHighlited(box,square):
+    square.setFill(color_rgb(255,0,255))
+    x = Box.getHighlight
+    print (x)
+    if x==0:
+        square.setFill(color_rgb(0,255,0))
+    return square
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
 def makeInterface(win):
@@ -151,10 +157,17 @@ def left(matrix):
                 leftRow[k] = matrix[i][j] #creates column shifted up
                 k = k+1
         for j in range(0,4):
+<<<<<<< HEAD
             if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
+=======
+            if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
+                x = upColumn[j];
+                upColumn[j] = x*2
+                upColumn[j+1] = 0
+>>>>>>> fuk_me
 
         k = 0
         for j in range(0,5):
@@ -163,6 +176,7 @@ def left(matrix):
                 matrix[i][j] = leftRow[j]
                 k = k + 1
 
+<<<<<<< HEAD
     return matrix
 
 #rotates matrix clockwise 90 degrees
@@ -173,6 +187,9 @@ def clockwise(matrix):
             rotatedMatrix[i][j] = matrix[5-j-1][i]
     return rotatedMatrix
     
+=======
+        return matrix
+>>>>>>> fuk_me
                 
     
     
