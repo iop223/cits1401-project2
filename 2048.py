@@ -53,7 +53,7 @@ def drawboxes(win):
             
 def isHighlited(box,square):
     square.setFill(color_rgb(255,0,255))
-    x = Box.getHighlight
+    x = Box.getHighlight()
     print (x)
     if x==0:
         square.setFill(color_rgb(0,255,0))
@@ -157,17 +157,14 @@ def left(matrix):
                 leftRow[k] = matrix[i][j] #creates column shifted up
                 k = k+1
         for j in range(0,4):
-<<<<<<< HEAD
             if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
-=======
             if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
                 x = upColumn[j];
                 upColumn[j] = x*2
                 upColumn[j+1] = 0
->>>>>>> fuk_me
 
         k = 0
         for j in range(0,5):
@@ -176,7 +173,6 @@ def left(matrix):
                 matrix[i][j] = leftRow[j]
                 k = k + 1
 
-<<<<<<< HEAD
     return matrix
 
 #rotates matrix clockwise 90 degrees
@@ -186,11 +182,8 @@ def clockwise(matrix):
         for j in range(0,5):
             rotatedMatrix[i][j] = matrix[5-j-1][i]
     return rotatedMatrix
-    
-=======
-        return matrix
->>>>>>> fuk_me
-                
+
+
     
     
 main()
