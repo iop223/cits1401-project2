@@ -143,7 +143,9 @@ def newGamestate():
         for j in range(0,5):
             rand = random.randint(0, 1)
             if rand == 1:
-                matrix[i][j] = 2
+                box = Box()
+                setattr(box, "value",2)
+                matrix[i][j] = Box()
     return matrix
 #Moves tiles left
 def left(matrix):
@@ -165,14 +167,20 @@ def left(matrix):
                 x = upColumn[j];
                 upColumn[j] = x*2
                 upColumn[j+1] = 0
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e84b181d65608f3c786dcc0b6c531557de1c84a
         k = 0
         for j in range(0,5):
             matrix[i][j] = 0
             if leftRow[j] != 0:
                 matrix[i][j] = leftRow[j]
                 k = k + 1
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e84b181d65608f3c786dcc0b6c531557de1c84a
     return matrix
 
 #rotates matrix clockwise 90 degrees
@@ -182,8 +190,12 @@ def clockwise(matrix):
         for j in range(0,5):
             rotatedMatrix[i][j] = matrix[5-j-1][i]
     return rotatedMatrix
+<<<<<<< HEAD
 
 
     
+=======
+    return matrix
+>>>>>>> 1e84b181d65608f3c786dcc0b6c531557de1c84a
     
 main()
