@@ -9,7 +9,7 @@ Ymin, Ymax = 0, 720
 def main():
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton = makeInterface(win)
+    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     Pt = win.getMouse()
     x = 0
     while x==0:
@@ -18,13 +18,15 @@ def main():
             Pt = (0.0)
             win.close
             print ("kys")
-        elif isClicked(Pt,upButton):
+        elif isClicked(Pt,newGamebutton):
+            print ("Create new game")
+        elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
             print ("up")
-        elif isClicked(Pt,downButton):
+        elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
             print ("down")
-        elif isClicked(Pt,leftButton):
+        elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
             print ("left")
-        elif isClicked(Pt,rightButton):
+        elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             print ("right")
             
 def erase(win):
@@ -34,13 +36,15 @@ def erase(win):
     
 def drawboxes(win):
     listBox=[]
+    x=0
     for i in range(0,5):
         for j in range(0,5):
             box = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             box.setFill(color_rgb(255,0,255))
             box.draw(win)
             listBox.append(box)
-            print (listBox[i])
+            print (listBox[x])
+            x=x+1
             
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
@@ -91,7 +95,20 @@ def makeInterface(win):
     rightButton.draw(win)
     ng = Text(Point(Xmin+650,Ymin+50), "right")
     ng.draw(win)
-    return quitButton, newGamebutton, upButton, downButton, leftButton, rightButton
+
+    #clicking on the top row of squares moves up
+    upBorder = Rectangle(Point(Xmin+105, Ymin+620),Point(Xmin+400,Ymin+715))
+
+    #clicking on the bottom row of squares moves down
+    downBorder = Rectangle(Point(Xmin+105, Ymin+220),Point(Xmin+400,Ymin+315))
+
+    #clicking on the left row of squares moves left
+    leftBorder = Rectangle(Point(Xmin+5, Ymin+320),Point(Xmin+100,Ymin+615))
+
+    #clicking on the right row of squares moves right
+    rightBorder = Rectangle(Point(Xmin+405, Ymin+320),Point(Xmin+500,Ymin+615))
+
+    return quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder
 
 
 #This function should take the Point pClick where the mouse was clicked and the button identifier and return True if the click was inside the button otherwise it should return False.
