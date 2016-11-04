@@ -150,7 +150,7 @@ def up(matrix):
                 initialColumn[j] = matrix[i][j] #creates alias of column
                 upColumn[j] = matrix[i][k] # creates column shifted up
                 k = k+1
-"""        for j in range(0,4):
+"""     for j in range(0,4):
             if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
                 x = upColumn[j];
                 upColumn[j] = x*2
@@ -163,7 +163,7 @@ def up(matrix):
                 matrix[i][j] = upColumn[j]
                 k = k + 1
 """
-        return matrix
+    return matrix
                 
     
     
