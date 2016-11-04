@@ -16,6 +16,8 @@ def main():
     x = 0
     gamestate = newGamestate()
     print(gamestate)
+    up()
+    print(gamestate)
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -26,7 +28,6 @@ def main():
             print ("up")
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
             print ("down")
-            
         elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
             print ("left")
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
@@ -34,20 +35,19 @@ def main():
 
             
 def erase(win):
-    
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
     rect.draw(win)
     
 def drawboxes(win):
-    gamebox = Box()
+    gamebox = box()
     listBox=[]
     x=0
     for i in range(0,5):
         for j in range(0,5):
-            gameBox.setShape = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            gameBox.setCoordinate = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             gameBox.setColour(0)
-            gameBox.drawSHape().draw(win)
+            gameBox.drawBox().draw(win)
             listBox.append(gameBox)
             print (listBox[x])
             x=x+1
@@ -138,11 +138,35 @@ def newGamestate():
             rand = random.randint(0, 1)
             if rand == 1:
                 matrix[i][j] = 2
-    matrix[0][1] = 2
     return matrix
-#Moves tiles upwards
-def up(matrix):
-    foobar = sdad
-    
+#Moves tiles upwards; return true if something moved
+def up():
+    legalMove = false
+    for i in range(0,5):
+        k=0
+        upColumn = {0,0,0,0,0}
+        initialColumn = {0,0,0,0,0}
+        for j in range(0,5):
+            if(gamestate[i][j] != 0):
+                initialColumn[j] = gamestate[i][j] #creates alias of column
+                upColumn[j] = gamestate[i][k] # creates column shifted up
+                k = k+1
+        for j in range(0,5):
+            if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
+                x = upColumn[j];
+                upColumn[j] = x*2
+                upColumn[i+1] = 0
 
+        k = 0
+        for j in range(0,5):
+            gamestate[i][j] = 0
+            if upColumn[j] != 0:
+                gamestate[i][j] = upColumn[j]
+                k = k + 1
+            if gamestate[i][j] != initialColumn[j]:
+                legalMove = true
+    return legalMove
+                
+    
+    
 main()
