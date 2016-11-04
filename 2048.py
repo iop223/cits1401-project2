@@ -22,25 +22,27 @@ def main():
             print ("up")
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
             print ("down")
+            
         elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
             print ("left")
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             print ("right")
             
 def erase(win):
+    
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
     rect.draw(win)
     
 def drawboxes(win):
-    gamebox= box()
+    gamebox = Box()
     listBox=[]
     x=0
     for i in range(0,5):
         for j in range(0,5):
-            gameBox.setCoordinate = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
+            gameBox.setShape = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             gameBox.setColour(0)
-            gameBox.drawBox().draw(win)
+            gameBox.drawSHape().draw(win)
             listBox.append(gameBox)
             print (listBox[x])
             x=x+1

@@ -1,59 +1,42 @@
 from graphics import *
 class Box(object):
-    coordinate = Rectangle(Point(0,0),Point(0,0))
-    value = 0
+    shape = Rectangle(Point(0,0),Point(0,0))
+    value = 0.0
     highlight = 0
-    colour = (255,0,255)
     
-    def __init__(self,coordinate,value,highlight):
-        self.coordinate = coordinate
+    def __init__(shape, value , highlight):
+        self.shape = shape
         self.value = value
-        self.highlight = highlight
-        self.colour = colour
+        self.highlight = value
         
-    def setBox(coordinate,value,highlight):
+    def makeBox(shape,value,highlight):
         box = Box()
-        box.coordinate = coordinate
+        box.shape = shape
         box.value = value
         box.highlight = highlight
-        box.colour = determineHighlight(highlight)
+        determineHighlight(highlight,shape)
         return box
-    
-    def setValue(value):
-        box.value = value
 
-    def setCoordinate(coordinate):
-        box.coordiante = coordinate
+    def setShape(shape):
+        box.shape = shape
 
     def setColour(highlight):
-        box.colour = determineHighlight(highlight)
+        box.highlight = highlight
+        determineHighlight(highlight,shape)
 
-    def getBox():
-        return box
-
-    def getValue():
-        return value
-    
-    def getColour():
-        return colour
-
-    def getCoordinate():
-        return coordinate
-
-    def getMidpoint(coordiante):
-        midpointX = (coordinate.getP1().getX() + coordinate.getP2().getX())/2
-        midpointY = (coordinate.getP1().getY() + coordinate.getP2().getY())/2
+    def getMidpoint(shape):
+        midpointX = (shape.getP1().getX() + shape.getP2().getX())/2
+        midpointY = (shape.getP1().getY() + shape.getP2().getY())/2
         midpoint = Point(midpointX,midpointY)
         return midpoint
     
-    def determineHighlight(highlight):
-        colourTemp = setFill(color_rgb(255,0,255))
+    def determineHighlight(highlight,rectangle):
+        colourTemp = shape.setFill(color_rgb(255,0,255))
         if highlight == 1:
-                colourTemp = setFill(color_rgb(188,0,255))
+                colourTemp = shape.setFill(color_rgb(188,0,255))
         return colourTemp
 
-    def drawBox():
-        box = box.getCoordiante()
-        box.setFill(colour_rgb(box.getColour()))
-        return box
+    def drawShape(shape):
+        return shape
+
 
