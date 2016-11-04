@@ -17,7 +17,7 @@ def main():
     gameState = newGamestate()
     print(gameState)
     print("shift up")
-    print(up(gameState))
+    print(clockwise(gameState))
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -139,31 +139,40 @@ def newGamestate():
             if rand == 1:
                 matrix[i][j] = 2
     return matrix
-#Moves tiles upwards; return 1 if something moved
-def up(matrix):
+#Moves tiles left
+def left(matrix):
     for i in range(0,5):
         k=0
-        upColumn = [0,0,0,0,0]
-        initialColumn = [0,0,0,0,0]
+        leftRow = [0,0,0,0,0]
+        initialRow = [0,0,0,0,0]
         for j in range(0,5):
             if(matrix[i][j] != 0):
-                initialColumn[j] = matrix[i][j] #creates alias of column
-                upColumn[j] = matrix[i][k] # creates column shifted up
+                initialRow[j] = matrix[i][j] #creates alias of column
+                leftRow[k] = matrix[i][j] #creates column shifted up
                 k = k+1
-"""     for j in range(0,4):
-            if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
-                x = upColumn[j];
-                upColumn[j] = x*2
-                upColumn[j+1] = 0
+        for j in range(0,4):
+            if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
+                x = leftRow[j];
+                leftRow[j] = x*2
+                leftRow[j+1] = 0
 
         k = 0
         for j in range(0,5):
             matrix[i][j] = 0
-            if upColumn[j] != 0:
-                matrix[i][j] = upColumn[j]
+            if leftRow[j] != 0:
+                matrix[i][j] = leftRow[j]
                 k = k + 1
-"""
+
     return matrix
+
+#rotates matrix clockwise 90 degrees
+def clockwise(matrix):
+    rotatedMatrix = [[0]*5 for i in range(5)]
+    for i in range(0,5):
+        for j in range(0,5):
+            rotatedMatrix[i][j] = matrix[5-j-1][i]
+    return rotatedMatrix
+    
                 
     
     
