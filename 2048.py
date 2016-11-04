@@ -2,6 +2,7 @@
 
 from graphics import *
 import math
+import box
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 
