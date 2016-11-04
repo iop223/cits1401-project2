@@ -2,6 +2,8 @@
 
 from graphics import *
 import math
+import box
+import random
 from box import *
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
@@ -12,6 +14,8 @@ def main():
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
+    gamestate = newGamestate()
+    print(gamestate)
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -27,6 +31,7 @@ def main():
             print ("left")
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             print ("right")
+
             
 def erase(win):
     
@@ -124,4 +129,20 @@ def statDisplay(win):
     #success = getSuccess(success)
     scoreDisplay = Text(Point(Xmin+100,Ymin+50), "SCORE").draw(win)
     moveSuccess = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
+
+#This function initialises the gamestate, putting 0 and 2 in random squares
+def newGamestate():
+    matrix = [[0]*5 for i in range(5)]
+    for i in range(0,5):
+        for j in range(0,5):
+            rand = random.randint(0, 1)
+            if rand == 1:
+                matrix[i][j] = 2
+    matrix[0][1] = 2
+    return matrix
+#Moves tiles upwards
+def up(matrix):
+    foobar = sdad
+    
+
 main()
