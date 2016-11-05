@@ -16,6 +16,7 @@ def main():
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
+    global score
     gameState = newGamestate()
     print(gameState)
     while x==0:
@@ -205,6 +206,8 @@ def newGamestate():
     return matrix
 #Moves tiles left
 def left(matrix):
+    global score
+    merged = False
     for i in range(0,5):
         k=0
         leftRow = [0,0,0,0,0]
@@ -219,14 +222,15 @@ def left(matrix):
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
-                score = score + 1
+                merged = True
         k = 0
         for j in range(0,5):
             matrix[i][j] = 0
             if leftRow[j] != 0:
                 matrix[i][j] = leftRow[j]
                 k = k + 1
-
+    if merged:
+        score = score + 1
     return matrix
 
 #rotates matrix clockwise 90 degrees
