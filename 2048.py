@@ -20,6 +20,7 @@ def main():
     global score
     global gameState
     gameState = newGamestate()
+    oldGameState = newGamestate()
     print(gameState)
     while x==0:
         Pt = win.getMouse()
@@ -39,6 +40,7 @@ def main():
             doMove(2) #moves left
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             doMove(3) #moves right
+        oldGameState=compareHighlight(oldGameState)
         drawboxes(win)
             
 def erase(win):
@@ -52,12 +54,23 @@ def drawboxes(win):
         for j in range(0,5):
             square = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
             square.setFill(color_rgb(255,0,255))
-            if highlightState[i][j]==1:
+            if highlightState[j][i]==1:
                 square.setFill(color_rgb(0,255,0))
             square.draw(win)
             if gameState[j][i] >= 2:
                 Text(Point(Xmin+52.5+i*100, Ymax-52.5-j*100),gameState[j][i]).draw(win)
             x=x+1
+
+def compareHighlight(oldGameState):
+    global gameState
+    global highlightState
+    for i in range(0,5):
+        for j in range(0,5):
+            highlightState[j][i] = 0
+            if (gameState[j][i] != oldGameState[j][i]) and gameState[j][i] != 0:
+                highlightState[j][i] = 1
+    oldGameState=gameState
+    return oldGameState
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
 def makeInterface(win):
@@ -162,7 +175,6 @@ def left(matrix):
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
-                highlightState[i][j+1]=1
                 merged = True
         k = 0
         for j in range(0,5):
