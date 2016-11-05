@@ -30,7 +30,6 @@ def main():
         if isClicked(Pt,quitButton):
             win.close()
         elif isClicked(Pt,newGamebutton):
-            print ("Create new game")
             gameState = newGamestate()
             score = 0
             if ifHuman ==0:
@@ -246,39 +245,23 @@ def doMove(direction): #moves the gamestate, counts score etc
     global score
     initialMatrix = [[0]*5 for i in range(5)]
     initialMatrix = gameState
-    print("before")
-    print(initialMatrix)
     if direction == 0:
         gameState = up(gameState)
-        print(initialMatrix)
-        print("are they equal")
-        print(gameState)
     elif direction == 1:
         gameState = down(gameState)
-        print(initialMatrix)
-        print("are they equal")
-        print(gameState)
     elif direction == 2:
         gameState = clockwise(gameState)
         gameState = up(gameState)
         gameState = antiClockwise(gameState)
-        print("after")
-        print(initialMatrix)
     elif direction == 3:
         gameState = right(gameState)
-        print(initialMatrix)
-        print("are they equal")
-        print(gameState)
         
     if gameState != initialMatrix:
-        print("kill yourself")
         legalMove = True
         gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
     else:
         legalMove = False
         score = score-1
-        print (legalMove)
-        print (score)
 
 #rotates matrix clockwise 90 degrees
 def clockwise(matrix):
@@ -340,7 +323,7 @@ def computerPlayer(win):
     oldGameState = newGamestate()
     while 0==0:
         rand = random.randint(0, 3)
-        time.sleep(1)
+        #time.sleep(0.001)
         doMove(rand)
         oldGameState=compareHighlight(oldGameState)
         drawboxes(win)
