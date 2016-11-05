@@ -161,8 +161,8 @@ def left(matrix):
         initialRow = [0,0,0,0,0]
         for j in range(0,5):
             if(matrix[i][j] != 0):
-                initialRow[j] = matrix[i][j] #creates alias of column
-                leftRow[k] = matrix[i][j] #creates column shifted up
+                initialRow[j] = matrix[i][j] #creates alias of row
+                leftRow[k] = matrix[i][j] #creates row shifted up
                 k = k+1
         for j in range(0,4):
             if leftRow[j] == leftRow[j+1] and leftRow[j]!=0: # if adjacent tile is equal, merge
@@ -171,7 +171,7 @@ def left(matrix):
                 leftRow[j+1] = 0
                 merged = True
         k = 0
-        for j in range(0,5):
+        for j in range(0,5): #shift row to the left again
             matrix[i][j] = 0
             if leftRow[j] != 0:
                 matrix[i][j] = leftRow[j]
@@ -199,6 +199,7 @@ def doMove(direction): #moves the gamestate, counts score etc
         legalMove = False
         score = score-1
         print (legalMove)
+        
         print (score)
     if gameOver(gameState):
         print("GAME OVER")
