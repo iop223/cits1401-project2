@@ -10,14 +10,14 @@ Ymin, Ymax = 0, 720
 
 #This function is the main control of the flow of the program
 def main():
+    score = 0
+    legalMove = False
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
     gameState = newGamestate()
     print(gameState)
-    print("shift up")
-    print(clockwise(gameState))
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -25,14 +25,57 @@ def main():
         elif isClicked(Pt,newGamebutton):
             print ("Create new game")
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
-            print ("up")
+            initialMatrix = [[0]*5 for i in range(5)]
+            initialMatrix = gameState
+            gameState = up(gameState)
+            if gameState != initialMatrix:
+                legalMove = True
+                score = score+1
+            else:
+                legalMove = False
+                score = score-1
+            print (gameState)
+            print (legalMove)
+            print (score)
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
-            print ("down")
+            initialMatrix = [[0]*5 for i in range(5)]
+            initialMatrix = gameState
+            gameState = down(gameState)
+            if gameState != initialMatrix:
+                legalMove = True
+                score = score+1
+            else:
+                legalMove = False
+                score = score-1
+            print (gameState)
+            print (legalMove)
+            print (score)
         elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
-            print ("left")
+            initialMatrix = [[0]*5 for i in range(5)]
+            initialMatrix = gameState
+            gameState = left(gameState)
+            if gameState != initialMatrix:
+                legalMove = True
+                score = score+1
+            else:
+                legalMove = False
+                score = score-1
+            print (gameState)
+            print (legalMove)
+            print (score)
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
-            print ("right")
-
+            initialMatrix = [[0]*5 for i in range(5)]
+            initialMatrix = gameState
+            gameState = right(gameState)
+            if gameState != initialMatrix:
+                legalMove = True
+                score = score+1
+            else:
+                legalMove = False
+                score = score-1
+            print (gameState)
+            print (legalMove)
+            print (score)
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -63,7 +106,7 @@ def isHighlited(box,square):
 def makeInterface(win):
     win.setBackground(color_rgb(139,69,19))
     erase(win)
-    drawboxes(win)
+    #drawboxes(win)
     statDisplay(win)
 
     #rectangle button with text
@@ -161,10 +204,10 @@ def left(matrix):
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
-            if upColumn[j] == upColumn[j+1] and upColumn[j]!=0:
-                x = upColumn[j];
-                upColumn[j] = x*2
-                upColumn[j+1] = 0
+            if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
+                x = leftRow[j];
+                leftRow[j] = x*2
+                leftRow[j+1] = 0
 
         k = 0
         for j in range(0,5):
@@ -182,7 +225,28 @@ def clockwise(matrix):
         for j in range(0,5):
             rotatedMatrix[i][j] = matrix[5-j-1][i]
     return rotatedMatrix
-
+#rotates matrix clockwise 90 degrees
+def antiClockwise(matrix):
+    return clockwise(clockwise(clockwise(matrix)))
+#Moves tiles up
+def up(matrix):
+    matrix = antiClockwise(matrix)
+    matrix = left(matrix)
+    matrix = clockwise(matrix)
+    return matrix
+#Move tiles down
+def down(matrix):
+    matrix = clockwise(matrix)
+    matrix = left(matrix)
+    matrix = antiClockwise(matrix)
+    return matrix
+def right(matrix):
+    matrix = clockwise(clockwise(matrix))
+    matrix = left(matrix)
+    matrix = clockwise(clockwise(matrix))
+    return matrix
+    
+    
     
 
 
