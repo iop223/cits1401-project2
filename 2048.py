@@ -29,6 +29,7 @@ def main():
             gameState = newGamestate()
             print(gameState)
             score = 0
+            computerPlayer()
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
             doMove(0) #moves up
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
@@ -190,6 +191,7 @@ def doMove(direction): #moves the gamestate, counts score etc
         gameState = left(gameState)
     elif direction == 3:
         gameState = right(gameState)
+        
     if gameState != initialMatrix:
         legalMove = True
     else:
@@ -258,9 +260,13 @@ def findZero(matrix):
     return coordinate
 
 def computerPlayer():
-    rand = random.randint(0, 3)
-    for i in range(1,999):
+    global gameState
+    while 0==0:
+        rand = random.randint(0, 3)
         doMove(rand)
+        print(gameState)
+        if gameOver(gameState):
+            break
     
     
     
