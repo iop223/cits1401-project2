@@ -9,6 +9,7 @@ Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 score = 0
 gameState = [[0]*5 for i in range(5)]
+highlightState = [[0]*5 for i in range(5)]
 #This function is the main control of the flow of the program
 def main():
     legalMove = False
@@ -38,6 +39,7 @@ def main():
             doMove(2) #moves left
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             doMove(3) #moves right
+        drawboxes(win)
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -45,30 +47,23 @@ def erase(win):
     rect.draw(win)
     
 def drawboxes(win):
-    box = Box()
-    listBox=[]
     x=0
     for i in range(0,5):
         for j in range(0,5):
             square = Rectangle(Point(Xmin+5+i*100,Ymax-5-j*100), Point(Xmin+100+i*100,Ymax-100-j*100))
-            square = isHighlited(box,square)
-            listBox.append(box)
+            square.setFill(color_rgb(255,0,255))
+            if highlightState[i][j]==1:
+                square.setFill(color_rgb(0,255,0))
             square.draw(win)
+            if gameState[i][j] >= 2:
+                Text(Point(Xmin+52.5+i*100, Ymax-52.5-j*100),gameState[i][j]).draw(win)
             x=x+1
-            
-def isHighlited(box,square):
-    square.setFill(color_rgb(255,0,255))
-    x = Box.getHighlight()
-    print (x)
-    if x==0:
-        square.setFill(color_rgb(0,255,0))
-    return square
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
 def makeInterface(win):
     win.setBackground(color_rgb(139,69,19))
     erase(win)
-    #drawboxes(win)
+    drawboxes(win)
     statDisplay(win)
 
     #rectangle button with text
@@ -153,6 +148,7 @@ def newGamestate():
 #Moves tiles left
 def left(matrix):
     global score
+    global highlightState
     merged = False
     for i in range(0,5):
         k=0
@@ -168,6 +164,7 @@ def left(matrix):
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
+                highlightState[i][j+1]=1
                 merged = True
         k = 0
         for j in range(0,5):
@@ -267,12 +264,4 @@ def computerPlayer():
         print(gameState)
         if gameOver(gameState):
             break
-    
-    
-    
-    
-
-
-    
-    
 main()
