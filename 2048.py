@@ -206,6 +206,7 @@ def doMove(direction): #moves the gamestate, counts score etc
         
     if gameState != initialMatrix:
         legalMove = True
+        gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
     else:
         legalMove = False
         score = score-1
@@ -214,7 +215,6 @@ def doMove(direction): #moves the gamestate, counts score etc
     if gameOver(gameState):
         print("GAME OVER")
     else:
-        gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
         print (gameState)
 
 #rotates matrix clockwise 90 degrees
