@@ -9,6 +9,7 @@ Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 score = 0
 gameState = [[0]*5 for i in range(5)]
+box = Box()
 #This function is the main control of the flow of the program
 def main():
     legalMove = False
@@ -18,6 +19,7 @@ def main():
     x = 0
     global score
     global gameState
+    global box
     gameState = newGamestate()
     print(gameState)
     while x==0:
@@ -160,9 +162,9 @@ def left(matrix):
         leftRow = [0,0,0,0,0]
         initialRow = [0,0,0,0,0]
         for j in range(0,5):
-            if(matrix[i][j] != 0):
-                initialRow[j] = matrix[i][j] #creates alias of column
-                leftRow[k] = matrix[i][j] #creates column shifted up
+            if(matrix[i][j].getattr(box,"value") != 0):
+                initialRow[j] = matrix[i][j].getattr(box,"value") #creates alias of column
+                leftRow[k] = matrix[i][j].getattr(box,"value") #creates column shifted up
                 k = k+1
         for j in range(0,4):
             if leftRow[j] == leftRow[j+1] and leftRow[j]!=0: # if adjacent tile is equal, merge
@@ -172,9 +174,9 @@ def left(matrix):
                 merged = True
         k = 0
         for j in range(0,5):
-            matrix[i][j] = 0
+            matrix[i][j].setattr(box,"value",0)
             if leftRow[j] != 0:
-                matrix[i][j] = leftRow[j]
+                matrix[i][j].setattr = leftRow[j]
                 k = k + 1
     if merged:
         score = score + 1
