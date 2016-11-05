@@ -175,6 +175,8 @@ def left(matrix):
         k = 0
         for j in range(0,5):
             matrix[i][j].setattr(box,"value",0)
+        for j in range(0,5): #shift row to the left again
+            matrix[i][j] = 0
             if leftRow[j] != 0:
                 matrix[i][j].setattr = leftRow[j]
                 k = k + 1
@@ -201,6 +203,7 @@ def doMove(direction): #moves the gamestate, counts score etc
         legalMove = False
         score = score-1
         print (legalMove)
+        
         print (score)
     if gameOver(gameState):
         print("GAME OVER")
