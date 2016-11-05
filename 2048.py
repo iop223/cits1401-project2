@@ -2,16 +2,20 @@
 
 from graphics import *
 import math
-import box
 import random
-from box import *
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 score = 0
 gameState = [[0]*5 for i in range(5)]
 highlightState = [[0]*5 for i in range(5)]
+moveDirection = "foobar"
 #This function is the main control of the flow of the program
 def main():
+<<<<<<< HEAD
+=======
+    global moveDirection
+    legalMove = False
+>>>>>>> dec57dc634604290c5f890633abdf7a2d07eb0b4
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
@@ -20,7 +24,6 @@ def main():
     global gameState
     gameState = newGamestate()
     oldGameState = newGamestate()
-    print(gameState)
     while x==0:
         Pt = win.getMouse()
         if isClicked(Pt,quitButton):
@@ -28,16 +31,19 @@ def main():
         elif isClicked(Pt,newGamebutton):
             print ("Create new game")
             gameState = newGamestate()
-            print(gameState)
             score = 0
             computerPlayer()
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
+            moveDirection = "UP"
             doMove(0) #moves up
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
+            moveDirection = "DOWN"
             doMove(1) #moves down
         elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
+            moveDirection = "LEFT"
             doMove(2) #moves left
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
+            moveDirection = "RIGHT"
             doMove(3) #moves right
         oldGameState=compareHighlight(oldGameState)
         drawboxes(win)
@@ -144,12 +150,13 @@ def isClicked(pClick, button):
 #This function Displays the score
 def statDisplay(win):
     global score
+    global moveDirection
     statBar = Rectangle(Point(Xmin, Ymin),Point(Xmax-300,Ymin+200))
     statBar.setFill(color_rgb(139,69,19))
     statBar.setOutline(color_rgb(139,69,19))
     statBar.draw(win)
     scoreDisplay = Text(Point(Xmin+100,Ymin+50), score).draw(win)
-    moveSuccess = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
+    moveSuccess = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is %s" % moveDirection).draw(win)
 
 #This function initialises the gamestate, putting 0 and 2 in random squares
 def newGamestate():
@@ -172,7 +179,7 @@ def left(matrix):
         for j in range(0,5):
             if(matrix[i][j] != 0):
                 initialRow[j] = matrix[i][j] #creates alias of column
-                leftRow[k] = matrix[i][j] #creates column shifted up
+                leftRow[k] = matrix[i][j] #creates column shifted left
                 k = k+1
         for j in range(0,4):
             if leftRow[j] == leftRow[j+1] and leftRow[j]!=0: # if adjacent tile is equal, merge
@@ -194,16 +201,32 @@ def doMove(direction): #moves the gamestate, counts score etc
     global score
     initialMatrix = [[0]*5 for i in range(5)]
     initialMatrix = gameState
+    print("before")
+    print(initialMatrix)
     if direction == 0:
         gameState = up(gameState)
+        print(initialMatrix)
+        print("are they equal")
+        print(gameState)
     elif direction == 1:
         gameState = down(gameState)
+        print(initialMatrix)
+        print("are they equal")
+        print(gameState)
     elif direction == 2:
-        gameState = left(gameState)
+        gameState = clockwise(gameState)
+        gameState = up(gameState)
+        gameState = antiClockwise(gameState)
+        print("after")
+        print(initialMatrix)
     elif direction == 3:
         gameState = right(gameState)
+        print(initialMatrix)
+        print("are they equal")
+        print(gameState)
         
     if gameState != initialMatrix:
+        print("kill yourself")
         legalMove = True
         gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
     else:
@@ -213,8 +236,6 @@ def doMove(direction): #moves the gamestate, counts score etc
         print (score)
     if gameOver(gameState):
         print("GAME OVER")
-    else:
-        print (gameState)
 
 #rotates matrix clockwise 90 degrees
 def clockwise(matrix):
