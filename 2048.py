@@ -55,8 +55,8 @@ def drawboxes(win):
             if highlightState[i][j]==1:
                 square.setFill(color_rgb(0,255,0))
             square.draw(win)
-            if gameState[i][j] >= 2:
-                Text(Point(Xmin+52.5+i*100, Ymax-52.5-j*100),gameState[i][j]).draw(win)
+            if gameState[j][i] >= 2:
+                Text(Point(Xmin+52.5+i*100, Ymax-52.5-j*100),gameState[j][i]).draw(win)
             x=x+1
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
 #It should return the variable identifiers of the Buttons and Entry boxes to the calling function. 
@@ -130,10 +130,8 @@ def isClicked(pClick, button):
 
 #This function Displays the score
 def statDisplay(win):
-    #score = calcScore(score)
-    #direction = getDirection(direction)
-    #success = getSuccess(success)
-    scoreDisplay = Text(Point(Xmin+100,Ymin+50), "SCORE").draw(win)
+    global score
+    scoreDisplay = Text(Point(Xmin+100,Ymin+50), score).draw(win)
     moveSuccess = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
 
 #This function initialises the gamestate, putting 0 and 2 in random squares
@@ -248,8 +246,8 @@ def gameOver(matrix):
 #finds the bottom right tile to spawn the 2 square
 def findZero(matrix):
     coordinate = [0,0]
-    for j in range(4,-1,-1):
-        for i in range(4,-1,-1):
+    for i in range(4,-1,-1):
+        for j in range(4,-1,-1):
             if matrix[i][j] ==0:
                 coordinate[0] = i
                 coordinate[1] = j
