@@ -7,10 +7,10 @@ import random
 from box import *
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
+score = 0
 
 #This function is the main control of the flow of the program
 def main():
-    score = 0
     legalMove = False
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
@@ -24,13 +24,15 @@ def main():
             win.close()
         elif isClicked(Pt,newGamebutton):
             print ("Create new game")
+            gameState = newGamestate()
+            print(gameState)
+            score = 0
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
             initialMatrix = [[0]*5 for i in range(5)]
             initialMatrix = gameState
             gameState = up(gameState)
             if gameState != initialMatrix:
                 legalMove = True
-                score = score+1
             else:
                 legalMove = False
                 score = score-1
@@ -47,7 +49,6 @@ def main():
             gameState = down(gameState)
             if gameState != initialMatrix:
                 legalMove = True
-                score = score+1
             else:
                 legalMove = False
                 score = score-1
@@ -64,7 +65,6 @@ def main():
             gameState = left(gameState)
             if gameState != initialMatrix:
                 legalMove = True
-                score = score+1
             else:
                 legalMove = False
                 score = score-1
@@ -81,7 +81,6 @@ def main():
             gameState = right(gameState)
             if gameState != initialMatrix:
                 legalMove = True
-                score = score+1
             else:
                 legalMove = False
                 score = score-1
@@ -220,6 +219,7 @@ def left(matrix):
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
+                score = score + 1
         k = 0
         for j in range(0,5):
             matrix[i][j] = 0
@@ -282,7 +282,9 @@ def findZero(matrix):
                 coordinate[1] = j
                 return coordinate
     return coordinate
-    
+
+def computerPlayer():
+    foobar=foo
     
     
 
