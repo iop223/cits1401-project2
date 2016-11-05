@@ -12,7 +12,6 @@ gameState = [[0]*5 for i in range(5)]
 highlightState = [[0]*5 for i in range(5)]
 #This function is the main control of the flow of the program
 def main():
-    legalMove = False
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
