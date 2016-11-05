@@ -34,9 +34,13 @@ def main():
             else:
                 legalMove = False
                 score = score-1
-            print (gameState)
             print (legalMove)
             print (score)
+            if gameOver(gameState):
+                print("GAME OVER")
+            else:
+                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
+                print (gameState)
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
             initialMatrix = [[0]*5 for i in range(5)]
             initialMatrix = gameState
@@ -47,9 +51,13 @@ def main():
             else:
                 legalMove = False
                 score = score-1
-            print (gameState)
             print (legalMove)
             print (score)
+            if gameOver(gameState):
+                print("GAME OVER")
+            else:
+                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
+                print (gameState)
         elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
             initialMatrix = [[0]*5 for i in range(5)]
             initialMatrix = gameState
@@ -60,9 +68,13 @@ def main():
             else:
                 legalMove = False
                 score = score-1
-            print (gameState)
             print (legalMove)
             print (score)
+            if gameOver(gameState):
+                print("GAME OVER")
+            else:
+                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
+                print (gameState)
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             initialMatrix = [[0]*5 for i in range(5)]
             initialMatrix = gameState
@@ -73,9 +85,13 @@ def main():
             else:
                 legalMove = False
                 score = score-1
-            print (gameState)
             print (legalMove)
             print (score)
+            if gameOver(gameState):
+                print("GAME OVER")
+            else:
+                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
+                print (gameState)
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -200,15 +216,10 @@ def left(matrix):
                 leftRow[k] = matrix[i][j] #creates column shifted up
                 k = k+1
         for j in range(0,4):
-            if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
+            if leftRow[j] == leftRow[j+1] and leftRow[j]!=0: # if adjacent tile is equal, merge
                 x = leftRow[j];
                 leftRow[j] = x*2
                 leftRow[j+1] = 0
-            if leftRow[j] == leftRow[j+1] and leftRow[j]!=0:
-                x = leftRow[j];
-                leftRow[j] = x*2
-                leftRow[j+1] = 0
-
         k = 0
         for j in range(0,5):
             matrix[i][j] = 0
@@ -240,11 +251,37 @@ def down(matrix):
     matrix = left(matrix)
     matrix = antiClockwise(matrix)
     return matrix
+#move tiles right
 def right(matrix):
     matrix = clockwise(clockwise(matrix))
     matrix = left(matrix)
     matrix = clockwise(clockwise(matrix))
     return matrix
+#gameOver boolean
+def gameOver(matrix):
+    isFull = True
+    gameOver = True
+    for i in range(0,5):
+        for j in range(0,5):
+            if matrix[i][j] == 0:
+                isFull = False
+                gameOver = False
+    if isFull:
+        for i in range(0,4):
+            for j in range(0,4):
+                if matrix[i][j] == matrix[i+1][j] or matrix[i][j] == matrix[i][j+1]:
+                    gameOver = False
+    return gameOver
+#finds the bottom right tile to spawn the 2 square
+def findZero(matrix):
+    coordinate = [0,0]
+    for j in range(4,-1,-1):
+        for i in range(4,-1,-1):
+            if matrix[i][j] ==0:
+                coordinate[0] = i
+                coordinate[1] = j
+                return coordinate
+    return coordinate
     
     
     
