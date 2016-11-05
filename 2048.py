@@ -8,7 +8,7 @@ from box import *
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 score = 0
-
+gameState = [[0]*5 for i in range(5)]
 #This function is the main control of the flow of the program
 def main():
     legalMove = False
@@ -17,6 +17,7 @@ def main():
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
     x = 0
     global score
+    global gameState
     gameState = newGamestate()
     print(gameState)
     while x==0:
@@ -29,69 +30,13 @@ def main():
             print(gameState)
             score = 0
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
-            initialMatrix = [[0]*5 for i in range(5)]
-            initialMatrix = gameState
-            gameState = up(gameState)
-            if gameState != initialMatrix:
-                legalMove = True
-            else:
-                legalMove = False
-                score = score-1
-            print (legalMove)
-            print (score)
-            if gameOver(gameState):
-                print("GAME OVER")
-            else:
-                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
-                print (gameState)
+            doMove(0) #moves up
         elif isClicked(Pt,downButton) or isClicked(Pt,downBorder):
-            initialMatrix = [[0]*5 for i in range(5)]
-            initialMatrix = gameState
-            gameState = down(gameState)
-            if gameState != initialMatrix:
-                legalMove = True
-            else:
-                legalMove = False
-                score = score-1
-            print (legalMove)
-            print (score)
-            if gameOver(gameState):
-                print("GAME OVER")
-            else:
-                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
-                print (gameState)
+            doMove(1) #moves down
         elif isClicked(Pt,leftButton) or isClicked(Pt,leftBorder):
-            initialMatrix = [[0]*5 for i in range(5)]
-            initialMatrix = gameState
-            gameState = left(gameState)
-            if gameState != initialMatrix:
-                legalMove = True
-            else:
-                legalMove = False
-                score = score-1
-            print (legalMove)
-            print (score)
-            if gameOver(gameState):
-                print("GAME OVER")
-            else:
-                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
-                print (gameState)
+            doMove(2) #moves left
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
-            initialMatrix = [[0]*5 for i in range(5)]
-            initialMatrix = gameState
-            gameState = right(gameState)
-            if gameState != initialMatrix:
-                legalMove = True
-            else:
-                legalMove = False
-                score = score-1
-            print (legalMove)
-            print (score)
-            if gameOver(gameState):
-                print("GAME OVER")
-            else:
-                gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
-                print (gameState)
+            doMove(3) #moves right
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -232,6 +177,31 @@ def left(matrix):
     if merged:
         score = score + 1
     return matrix
+def doMove(direction): #moves the gamestate, counts score etc
+    global gameState
+    global score
+    initialMatrix = [[0]*5 for i in range(5)]
+    initialMatrix = gameState
+    if direction == 0:
+        gameState = up(gameState)
+    elif direction == 1:
+        gameState = down(gameState)
+    elif direction == 2:
+        gameState = left(gameState)
+    elif direction == 3:
+        gameState = right(gameState)
+    if gameState != initialMatrix:
+        legalMove = True
+    else:
+        legalMove = False
+        score = score-1
+        print (legalMove)
+        print (score)
+    if gameOver(gameState):
+        print("GAME OVER")
+    else:
+        gameState[findZero(gameState)[0]][findZero(gameState)[1]] = 2
+        print (gameState)
 
 #rotates matrix clockwise 90 degrees
 def clockwise(matrix):
@@ -288,7 +258,11 @@ def findZero(matrix):
     return coordinate
 
 def computerPlayer():
-    foobar=foo
+    rand = random.randint(0, 3)
+    for i in range(1,999):
+        doMove(rand)
+    
+    
     
     
 
