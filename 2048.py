@@ -143,7 +143,7 @@ def statDisplay(win):
 
 #This function initialises the gamestate, putting 0 and 2 in random squares
 def newGamestate():
-    box = Box()
+    global box
     matrix = [[0]*5 for i in range(5)]
     for i in range(0,5):
         for j in range(0,5):
@@ -156,6 +156,7 @@ def newGamestate():
 #Moves tiles left
 def left(matrix):
     global score
+    global box
     merged = False
     for i in range(0,5):
         k=0
