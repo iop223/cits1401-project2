@@ -58,9 +58,7 @@ def drawboxes(win):
             
 def isHighlited(box,square):
     square.setFill(color_rgb(255,0,255))
-    x = Box.getHighlight()
-    print (x)
-    if x==0:
+    if getattr(box,"highlight",0)==1:
         square.setFill(color_rgb(0,255,0))
     return square
 #This function should make the Graphical User Interface i.e. the Entry boxes and the Buttons.
@@ -68,7 +66,7 @@ def isHighlited(box,square):
 def makeInterface(win):
     win.setBackground(color_rgb(139,69,19))
     erase(win)
-    #drawboxes(win)
+    drawboxes(win)
     statDisplay(win)
 
     #rectangle button with text
@@ -143,12 +141,15 @@ def statDisplay(win):
 
 #This function initialises the gamestate, putting 0 and 2 in random squares
 def newGamestate():
+    box = Box()
     matrix = [[0]*5 for i in range(5)]
     for i in range(0,5):
         for j in range(0,5):
             rand = random.randint(0, 1)
             if rand == 1:
-                matrix[i][j] = 2
+                matrix[i][j] = setattr(box,"value",2)
+            else:
+                matrix[i][j] = setattr(box,"value",0)
     return matrix
 #Moves tiles left
 def left(matrix):
