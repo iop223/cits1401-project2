@@ -11,11 +11,8 @@ highlightState = [[0]*5 for i in range(5)]
 moveDirection = "foobar"
 #This function is the main control of the flow of the program
 def main():
-<<<<<<< HEAD
-=======
     global moveDirection
     legalMove = False
->>>>>>> dec57dc634604290c5f890633abdf7a2d07eb0b4
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
     quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
@@ -48,11 +45,25 @@ def main():
         oldGameState=compareHighlight(oldGameState)
         drawboxes(win)
         statDisplay(win)
+        if gameOver(gameState):
+            endGame(win)                   
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
     rect.draw(win)
+    
+def endGame(win):
+    global gameState
+    global highlightState
+    global score
+    Text(Point(Xmin+200, Ymin+150),"GAME OVER").draw(win)
+    Text(Point(Xmin+200, Ymin+200),"Final Score %s"%score).draw(win)
+    gameState = newGamestate()
+    for i in range(0,5):
+        for j in range(0,5):
+            highlightState[i][j]=0
+    score = 0
     
 def drawboxes(win):
     x=0
@@ -234,8 +245,6 @@ def doMove(direction): #moves the gamestate, counts score etc
         score = score-1
         print (legalMove)
         print (score)
-    if gameOver(gameState):
-        print("GAME OVER")
 
 #rotates matrix clockwise 90 degrees
 def clockwise(matrix):
