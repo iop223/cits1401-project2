@@ -40,6 +40,7 @@ def main():
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             doMove(3) #moves right
         drawboxes(win)
+        statDisplay(win)
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
@@ -131,6 +132,10 @@ def isClicked(pClick, button):
 #This function Displays the score
 def statDisplay(win):
     global score
+    statBar = Rectangle(Point(Xmin, Ymin),Point(Xmax-300,Ymin+200))
+    statBar.setFill(color_rgb(139,69,19))
+    statBar.setOutline(color_rgb(139,69,19))
+    statBar.draw(win)
     scoreDisplay = Text(Point(Xmin+100,Ymin+50), score).draw(win)
     moveSuccess = Text(Point(Xmin+250,Ymin+50), "Move DIRECTION is SUCCESS").draw(win)
 
