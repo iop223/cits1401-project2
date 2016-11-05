@@ -3,19 +3,23 @@
 from graphics import *
 import math
 import random
+import time
 Xmin, Xmax = 0, 720
 Ymin, Ymax = 0, 720
 score = 0
 gameState = [[0]*5 for i in range(5)]
 highlightState = [[0]*5 for i in range(5)]
 moveDirection = "foobar"
+ifHuman = 1
 #This function is the main control of the flow of the program
 def main():
+    global ifHuman
     global moveDirection
     legalMove = False
     win = GraphWin('wewuz', Xmax-Xmin, Ymax-Ymin)    
     win.setCoords(Xmin, Ymin, Xmax, Ymax)
-    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder = makeInterface(win)
+    quitButton, newGamebutton, upButton, downButton, leftButton, rightButton, upBorder, downBorder, leftBorder, rightBorder= makeInterface(win)
+    humanTickbox, computerTickbox = drawTickboxes(win)
     x = 0
     global score
     global gameState
@@ -29,7 +33,8 @@ def main():
             print ("Create new game")
             gameState = newGamestate()
             score = 0
-            computerPlayer()
+            if ifHuman ==0:
+                computerPlayer(win)
         elif isClicked(Pt,upButton) or isClicked(Pt,upBorder):
             moveDirection = "UP"
             doMove(0) #moves up
@@ -42,6 +47,13 @@ def main():
         elif isClicked(Pt,rightButton) or isClicked(Pt,rightBorder):
             moveDirection = "RIGHT"
             doMove(3) #moves right
+        elif isClicked(Pt,humanTickbox):
+            ifHuman = 1
+            drawTickboxes(win)
+        elif isClicked(Pt,computerTickbox):
+            ifHuman = 0
+            drawTickboxes(win)
+
         oldGameState=compareHighlight(oldGameState)
         drawboxes(win)
         statDisplay(win)
@@ -143,6 +155,28 @@ def makeInterface(win):
 def isClicked(pClick, button):
     if (pClick.getX() > button.getP1().getX()) and (pClick.getY() > button.getP1().getY()) and (pClick.getX() < button.getP2().getX()) and (pClick.getY() < button.getP2().getY()):
         return True
+def drawTickboxes(win):
+    global ifHuman
+    #Tick for human player
+    humanTickbox = Rectangle(Point(Xmax-100, Ymax-170),Point(Xmax - 80, Ymax-150))
+    if ifHuman == 1:        
+        humanTickbox.setFill(color_rgb(0,0,0))
+    else:
+        humanTickbox.setFill(color_rgb(139,69,19))
+    humanTickbox.draw(win)
+    hm = Text(Point(Xmax-100,Ymax-190), "Human")
+    hm.draw(win)
+
+    #Tick for computer player
+    computerTickbox = Rectangle(Point(Xmax-100, Ymax-250),Point(Xmax - 80, Ymax-230))
+    if ifHuman == 1:        
+        computerTickbox.setFill(color_rgb(139,69,19))
+    else:
+        computerTickbox.setFill(color_rgb(0,0,0))
+    computerTickbox.draw(win)
+    cp = Text(Point(Xmax-100,Ymax-270), "Computer")
+    cp.draw(win)
+    return humanTickbox, computerTickbox
 
 #This function Displays the score
 def statDisplay(win):
@@ -288,12 +322,17 @@ def findZero(matrix):
                 return coordinate
     return coordinate
 
-def computerPlayer():
+def computerPlayer(win):
     global gameState
+    gameState = newGamestate()
+    oldGameState = newGamestate()
     while 0==0:
         rand = random.randint(0, 3)
+        time.sleep(1)
         doMove(rand)
-        print(gameState)
+        oldGameState=compareHighlight(oldGameState)
+        drawboxes(win)
+        statDisplay(win)
         if gameOver(gameState):
             break
 main()
