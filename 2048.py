@@ -57,11 +57,25 @@ def main():
         oldGameState=compareHighlight(oldGameState)
         drawboxes(win)
         statDisplay(win)
+        if gameOver(gameState):
+            endGame(win)                   
             
 def erase(win):
     rect = Rectangle(Point(Xmin,Ymin), Point(Xmax,Ymax))
     rect.setFill(color_rgb(139,69,19))
     rect.draw(win)
+    
+def endGame(win):
+    global gameState
+    global highlightState
+    global score
+    Text(Point(Xmin+200, Ymin+150),"GAME OVER").draw(win)
+    Text(Point(Xmin+200, Ymin+200),"Final Score %s"%score).draw(win)
+    gameState = newGamestate()
+    for i in range(0,5):
+        for j in range(0,5):
+            highlightState[i][j]=0
+    score = 0
     
 def drawboxes(win):
     x=0
@@ -265,8 +279,6 @@ def doMove(direction): #moves the gamestate, counts score etc
         score = score-1
         print (legalMove)
         print (score)
-    if gameOver(gameState):
-        print("GAME OVER")
 
 #rotates matrix clockwise 90 degrees
 def clockwise(matrix):
